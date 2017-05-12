@@ -28,6 +28,10 @@ mongoose.connect(config.database);
 // secret variable
 app.set('superSecret', config.secret);
 
+app.set('view engine', 'ejs');
+app.use('/public', express.static('public'));
+app.set('views','./views');
+
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -41,7 +45,8 @@ app.use(morgan('dev'));
 
 // basic route
 app.get('/', function (req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
+    /*res.send('Hello! The API is at http://localhost:' + port + '/api');*/
+    res.render('home');
 });
 
 app.get('/setup', function (req, res) {
